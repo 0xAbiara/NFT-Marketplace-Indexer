@@ -1,17 +1,15 @@
 #!/bin/bash
 
-# Install rindexer if not already installed
-if ! command -v rindexer &> /dev/null; then
-    echo "Installing rindexer..."
-    curl -L https://rindexer.xyz/install.sh | bash
+# Try to find rindexer in different locations
+if [ -f "$HOME/.rindexer/bin/rindexer" ]; then
+    export PATH="$HOME/.rindexer/bin:$PATH"
+elif [ -f "$HOME/.cargo/bin/rindexer" ]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+elif [ -f "/usr/local/bin/rindexer" ]; then
+    export PATH="/usr/local/bin:$PATH"
 fi
 
-# Add rindexer to PATH
-export PATH="$HOME/.rindexer/bin:$PATH"
-
-# Verify installation
+# Verify and start
 which rindexer
 rindexer --version
-
-# Start rindexer
 rindexer start all
