@@ -1,5 +1,5 @@
 name: marketplaceIndexer
-project_type: graphql
+project_type: indexer
 config: {}
 timestamps: null
 networks:
