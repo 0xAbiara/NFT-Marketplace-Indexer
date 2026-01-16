@@ -2,20 +2,14 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Install rindexer using their installation method
+RUN npm install -g @rindexer/cli
 
-# Install dependencies
-RUN npm install
-
-# Copy rindexer config and other files
+# Copy all project files
 COPY . .
 
-# Install rindexer globally
-RUN npm install -g rindexer
-
-# Expose the port rindexer uses (check your config, usually 3000 or 8080)
-EXPOSE 3000
+# Expose the port (rindexer typically uses 3001, check your config)
+EXPOSE 3001
 
 # Start rindexer
 CMD ["rindexer", "start", "all"]
