@@ -1,5 +1,5 @@
 name: marketplaceIndexer
-project_type: indexer
+project_type: evm
 config: {}
 timestamps: null
 networks:
