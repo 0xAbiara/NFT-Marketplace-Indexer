@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ['curl']
+
+[phases.install]
+cmds = [
+  'curl -L https://rindexer.xyz/install.sh | bash',
+  'export PATH="$HOME/.rindexer/bin:$PATH"'
+]
+
+[start]
+cmd = 'export PATH="$HOME/.rindexer/bin:$PATH" && rindexer start all'
