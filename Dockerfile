@@ -1,22 +1,25 @@
 FROM ubuntu:22.04
 
-# Prevent interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
-    bash \
+    tar \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Install rindexer
-RUN curl -L https://rindexer.xyz/install.sh | bash
+# Download rindexer binary directly from GitHub releases
+RUN curl -L -o rindexer.tar.gz https://github.com/joshstevens19/rindexer/releases/download/v0.29.0/rindexer_linux-amd64.tar.gz && \
+    tar -xzf rindexer.tar.gz && \
+    chmod +x rindexer && \
+    mv rindexer /usr/local/bin/ && \
+    rm rindexer.tar.gz
 
-# Add rindexer to PATH
-ENV PATH="/root/.rindexer/bin:$PATH"
+# Verify installation
+RUN rindexer --version
 
 # Copy project files
 COPY . .
