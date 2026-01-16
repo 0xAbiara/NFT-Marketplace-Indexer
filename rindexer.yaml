@@ -1,5 +1,5 @@
 name: marketplaceIndexer
-project_type: indexer
+project_type: graphql
 config: {}
 timestamps: null
 networks:
@@ -39,4 +39,4 @@ contracts:
   - name: ItemCanceled
   - name: ItemBought
 global:
-  health_port: 3000  # Set a proper port
+  health_port: 3001  # Set a proper port
