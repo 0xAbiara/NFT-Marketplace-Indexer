@@ -12,6 +12,11 @@ networks:
 storage:
   postgres:
     enabled: true
+    db_name: ${DB_NAME}
+    user: ${DB_USER}
+    password: ${DB_PASSWORD}
+    host: ${DB_HOST}
+    port: ${DB_PORT}
   csv:
     enabled: true
     path: ./generated_csv

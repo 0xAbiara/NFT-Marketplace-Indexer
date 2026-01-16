@@ -1,13 +1,11 @@
 #!/bin/bash
 
-# Try to find rindexer in different locations
-if [ -f "$HOME/.rindexer/bin/rindexer" ]; then
-    export PATH="$HOME/.rindexer/bin:$PATH"
-elif [ -f "$HOME/.cargo/bin/rindexer" ]; then
-    export PATH="$HOME/.cargo/bin:$PATH"
-elif [ -f "/usr/local/bin/rindexer" ]; then
-    export PATH="/usr/local/bin:$PATH"
-fi
+# Parse DATABASE_URL into components
+export DB_USER=$(echo $DATABASE_URL | sed -n 's/.*:\/\/\([^:]*\):.*/\1/p')
+export DB_PASSWORD=$(echo $DATABASE_URL | sed -n 's/.*:\/\/[^:]*:\([^@]*\)@.*/\1/p')
+export DB_HOST=$(echo $DATABASE_URL | sed -n 's/.*@\([^\/]*\)\/.*/\1/p')
+export DB_PORT=5432
+export DB_NAME=$(echo $DATABASE_URL | sed -n 's/.*\/\(.*\)/\1/p')
 
 # Verify and start
 which rindexer
