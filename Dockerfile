@@ -11,15 +11,17 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Download rindexer binary directly from GitHub releases
+# Download and extract rindexer binary
 RUN curl -L -o rindexer.tar.gz https://github.com/joshstevens19/rindexer/releases/download/v0.29.0/rindexer_linux-amd64.tar.gz && \
     tar -xzf rindexer.tar.gz && \
-    chmod +x rindexer && \
-    mv rindexer /usr/local/bin/ && \
+    ls -la && \
+    find . -name "*rindexer*" -type f && \
+    chmod +x ./rindexer_cli && \
+    mv ./rindexer_cli /usr/local/bin/rindexer && \
     rm rindexer.tar.gz
 
 # Verify installation
-RUN rindexer --version
+RUN which rindexer && rindexer --version
 
 # Copy project files
 COPY . .
